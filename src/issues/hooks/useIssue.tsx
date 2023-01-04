@@ -23,6 +23,7 @@ export const useIssue = (issueNumber: number) => {
         () => getIssueInfo(issueNumber),
     );
 
+    //con dependencia de issueQuery.data
     const commentsQuery = useQuery(
         ['issue', issueNumber, 'comments'],
         () => getIssueComments(issueQuery.data!.number),
