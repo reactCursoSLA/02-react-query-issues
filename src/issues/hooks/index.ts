@@ -1,3 +1,4 @@
 export { useLabels } from './useLabels';
-export { useIssues } from './useIssue';
+export { useIssues } from './useIssues';
+export { useIssue } from './useIssue';
 
