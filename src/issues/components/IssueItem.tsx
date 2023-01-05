@@ -4,7 +4,7 @@ import { FiInfo, FiMessageSquare, FiCheckCircle } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import { Issue } from '../interfaces';
 import { State } from '../interfaces/issue';
-import { getIssueInfo } from '../hooks/useIssue';
+import { getIssueComments, getIssueInfo } from '../hooks/useIssue';
 
 
 interface Props {
@@ -20,6 +20,11 @@ export const IssueItem: FC<Props> = ({ issue }) => {
         queryClient.prefetchQuery(
             ['issue', issue.number],
             ()=>getIssueInfo(issue.number)
+        )
+
+        queryClient.prefetchQuery(
+            ['issue', issue.number, 'comments'],
+            () => getIssueComments(issue.number),
         )
     };
     return (
