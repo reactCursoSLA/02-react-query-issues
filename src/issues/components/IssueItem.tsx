@@ -16,7 +16,10 @@ export const IssueItem: FC<Props> = ({ issue }) => {
 
     const queryClient = useQueryClient()
 
-    const onMouseEnter = () => {
+    /**
+     * hacer el llamado antes al api
+     */
+    const prefetchData = () => {
         queryClient.prefetchQuery(
             ['issue', issue.number],
             ()=>getIssueInfo(issue.number)
@@ -27,11 +30,23 @@ export const IssueItem: FC<Props> = ({ issue }) => {
             () => getIssueComments(issue.number),
         )
     };
+
+    /**
+     * almacenar la data en cache
+     */
+    const preSetData = () => {
+        queryClient.setQueryData(
+            ['issue', issue.number],
+            ()=>issue,
+        )
+    }
+
+
     return (
         <div className="card mb-2 issue">
             <div className="card-body d-flex align-items-center"
                 onClick={() => navigate(`/issues/issue/${issue.number}`)}
-                onMouseEnter={onMouseEnter}
+                onMouseEnter={preSetData}
             >
 
                 {
