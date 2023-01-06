@@ -17,11 +17,13 @@ const getIssues = async ({ labels = [], state }: Props): Promise<Issue[]> => {
 
     if (state) params.append('state', state);
 
+    //busqueda por label
     if (labels.length > 0) {
         const labelString = labels.join(',');
         params.append('labels', labelString);
     }
 
+    //limitar 5
     params.append('page', '1');
     params.append('per_page', '5');
 
