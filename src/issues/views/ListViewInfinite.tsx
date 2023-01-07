@@ -1,17 +1,19 @@
 import { useState } from 'react';
 
-import { useIssues } from '../hooks';
+
 import { IssueList } from '../components/IssueList';
 import { LabelPicker } from '../components/LabelPicker';
 import { LoadingIcon } from '../../shared/components/LoadingIcon';
 import { State } from '../interfaces';
+import { useIssuesInfinite } from '../hooks';
+
 
 
 export const ListViewInfinite = () => {
   const [selectedLabels, setSelectedLabels] = useState<string[]>([]);
   const [state, setState] = useState<State>()
 
-  const { issuesQuery } = useIssues({ state, labels: selectedLabels });
+  const { issuesQuery } = useIssuesInfinite({ state, labels: selectedLabels });;
 
   const onLabelChanged = (labelName: string) => {
     (selectedLabels.includes(labelName))
@@ -27,15 +29,15 @@ export const ListViewInfinite = () => {
           issuesQuery.isLoading ?
             <LoadingIcon /> :
             <IssueList
-              issues={issuesQuery.data || []}
+              issues={issuesQuery.data?.pages.flat() || []}
               state={state}
               onStateChanged={setState}
             />
         }
 
         <button className='btn btn-outline-primary mt-2'
-          // disabled={!issuesQuery.hasNextPage}
-          // onClick={() => issuesQuery.fetchNextPage()}
+        // disabled={!issuesQuery.hasNextPage}
+        // onClick={() => issuesQuery.fetchNextPage()}
         >
           Load More...
         </button>
