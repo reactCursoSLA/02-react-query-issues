@@ -39,6 +39,7 @@ export const useIssues = ({ state, labels }: Props) => {
 
     const [page, setPage] = useState(1);
 
+    //efecto si el estado o el label cambia reiniciar la pagina q
     useEffect(() => {
         setPage(1);
     }, [state, labels])
@@ -48,6 +49,7 @@ export const useIssues = ({ state, labels }: Props) => {
         ['issues', { state, labels, page }],
         () => getIssues({ labels, state, page }),
     );
+    //recorddar que se puede pasar dependencia onsucces en caso si deseamos capturar la data exitosa o la mala
 
 
     const nextPage = () => {
