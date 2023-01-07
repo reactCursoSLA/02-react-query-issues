@@ -43,8 +43,21 @@ const getIssues = async ({ pageParam = 1, queryKey }: QueryProps): Promise<Issue
 export const useIssuesInfinite = ({ state, labels }: Props) => {
 
     const issuesQuery = useInfiniteQuery(
-        ['issues', 'infinite', { state, labels, page: 1 }],
+        ['issues', 'infinite', { state, labels }],
         (data)=>getIssues(data),
+        {
+            /**
+             * @description  Funcion que se ejecuta cuando se obtiene una nueva pagina de datos
+             * @param lastPage  Ultima pagina de datos
+             * @param pages   Todas las paginas de datos
+             * @returns  El numero de la siguiente pagina
+             */
+            getNextPageParam: (lastPage, pages ) => {
+                if ( lastPage.length === 0 ) return;
+
+                return pages.length + 1;
+            },
+        }
     );
 
     return {

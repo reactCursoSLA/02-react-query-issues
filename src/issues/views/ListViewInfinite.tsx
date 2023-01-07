@@ -36,8 +36,8 @@ export const ListViewInfinite = () => {
         }
 
         <button className='btn btn-outline-primary mt-2'
-        // disabled={!issuesQuery.hasNextPage}
-        // onClick={() => issuesQuery.fetchNextPage()}
+          disabled={!issuesQuery.hasNextPage} // si no hay mas paginas, deshabilitamos el boton
+          onClick={() => issuesQuery.fetchNextPage()}
         >
           Load More...
         </button>
