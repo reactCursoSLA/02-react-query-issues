@@ -36,7 +36,7 @@ export const ListView = () => {
         <div className='d-flex mt-2 justify-content-between align-items-center'>
           <button
             className='btn btn-outline-primary'
-            disabled={issuesQuery.isFetching}
+            disabled={issuesQuery.isFetching}  // si esta cargando, deshabilitamos el boton
             onClick={prevPage}
           >
             Prev

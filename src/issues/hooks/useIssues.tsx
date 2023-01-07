@@ -70,7 +70,7 @@ export const useIssues = ({ state, labels }: Props) => {
         issuesQuery,
 
         // Getter
-        page: issuesQuery.isFetching ? 'Loading' : page,
+        page: issuesQuery.isFetching ? 'Loading' : page,  // si esta cargando, mostramos 'Loading'
 
         // Methods
         nextPage,
